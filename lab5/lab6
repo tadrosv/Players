@@ -1,0 +1,117 @@
+/*
+Victor Tadros
+CMPT 201 X01L
+Instructor: Hanan Saleh
+*/
+
+#include <stdio.h>
+#include <stdlib.h>
+#include "Player.h"
+
+void create_test_file(char *fileName, char *authr, char *docu, char *data){
+  FILE *PLAYER_FNAME1;
+  printf("Opening file %s ... ", fileName);
+  fopen(PLAYER_FNAME1, "w");
+  if (PLAYER_FNAME1 == NULL){
+    printf("failed to open: already exists.\n");
+    return;
+  }
+  else
+    printf("open, writing ... ");
+  
+  fprintf(PLAYER_FNAME1, "# FILE: %s\n"
+	                 "# Author: %s\n"
+	                 "%s\n"
+	                 "%s\n",
+	                 fileName, authr, docu, data);
+  fclose(PLAYER_FNAME1);
+  fprint("closed.\n");  
+}
+
+
+Player ** get_test_Player_array(int *num, int *size){
+  //  Player **players = NULL;
+  //players = malloc(*size * sizeof(Player*));
+  players = create_Player_array(5);
+  
+  char *names[] = {"Rik 43", "Wil 65", "Dan 87", "Jen 95", "Deb 31", "Man 52", "Ted 72"};
+  int n = 0;
+  for (int i = 0; i < 7; i++)
+    players = add_Players(players, entry2_Player(names[i], &n), num, size);
+  return players;
+}
+
+
+void save_Players(Player **players, int num, char *fName, char *author){
+
+  printf("Opening file %s ... ", fileName);
+  fopen(PLAYER_FNAME1, "w");
+  if (PLAYER_FNAME1 == NULL){
+    printf("failed to open: already exists.\n");
+    return;
+  }
+  else
+    printf("open, writing ... ");
+
+  fprintf(PLAYER_FNAME1, "# FILE: %s\n"
+	                 "# Author: %s\n",
+	                 //"%s\n"
+	                 //"%s\n",
+                         fName, author);
+
+  for (int i = 0; i < num; i++)
+    fprintf(PLAYER_FNAME1, "%2d. %s %d\n", i+, players[i]->name, players[i]->score);
+  
+
+  fclose(PLAYER_FNAME1);
+  fprint("closed.\n");
+}
+
+
+int file_exists(char *fName) ;
+
+Player ** load_Players(char *fName, char *author, 
+                       Player **players, int *num, int *size){
+
+ printf("Opening file %s ... ", fileName);
+  fopen(PLAYER_FNAME1, "w");
+  if (PLAYER_FNAME1 == NULL){
+    printf("failed to open: already exists.\n");
+    return players;
+  }
+  else
+    printf("open, writing ... ");
+
+  if (players == NULL){
+    players = malloc(*num * sizeof(Player*));
+    if (players = NULL)
+      return NULL;
+    else{
+      char *auth[] = "# Author: ", string[50], *new_a[15], *new_p[15];
+      int num = 0, n = 0;      
+      while(fscanf(PLAYER_FNAME1, "%s", string) == 1){
+	if (strstr(string, *auth) != 0){ //if match is found
+	  new_a = strtok(string, ":");
+	  author =  new_a[1];
+	  num++;
+	}
+
+	else if (isdigit(string[0])){
+	  new_p = strtok(string, ". ");
+	  players = add_Players(players, entry2_Player(new_p[1], &n), num, size);
+	}
+      }
+    }
+  }
+  
+  fprintf(PLAYER_FNAME1, "# FILE: %s\n"
+                         "# Author: %s\n",
+                         //"%s\n"
+                         //"%s\n",
+                         fName, author);
+  
+  return players;
+}
+
+int test_Player_fileIO(int argc, char *argv[]){
+}
